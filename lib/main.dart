@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 void main() => runApp(MyApp());
 
@@ -90,8 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.network(
-              'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
+            CachedNetworkImage(
+              imageUrl: 'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
             ),
           ],
         ),
