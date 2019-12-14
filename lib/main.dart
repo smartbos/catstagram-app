@@ -52,40 +52,60 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text('Catstagram', style: TextStyle(color: Colors.black87)),
-        backgroundColor: Colors.white,
-      ),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+    return SafeArea(
+        child: Scaffold(
+            backgroundColor: Colors.grey[100],
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                CachedNetworkImage(
-                  imageUrl: '${items[index]}',
+                Expanded(
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl:
+                    'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
+                  ),
                 ),
-                Text('text')
+                Container(
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Ink(
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: CircleBorder(),
+                        ),
+                        child: IconButton(
+                            icon: Icon(
+                              Icons.navigate_next,
+                              color: Colors.red,
+                            ),
+                            onPressed: null),
+                      ),
+                      Ink(
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: CircleBorder(),
+                        ),
+                        child: IconButton(
+                            icon: Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                            ),
+                            onPressed: null),
+                      )
+                    ],
+                  ),
+                ),
               ],
-            ),
-          );
-//          return ListTile(
-//            title: CachedNetworkImage(
-//              imageUrl: '${items[index]}',
-//            ),
-//          );
-        },
-      ),
-    );
+            )));
   }
 }
