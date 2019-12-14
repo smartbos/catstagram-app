@@ -62,50 +62,19 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return SafeArea(
         child: Scaffold(
-            backgroundColor: Colors.grey[100],
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl:
-                    'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Ink(
-                        decoration: ShapeDecoration(
-                          color: Colors.white,
-                          shape: CircleBorder(),
-                        ),
-                        child: IconButton(
-                            icon: Icon(
-                              Icons.navigate_next,
-                              color: Colors.red,
-                            ),
-                            onPressed: null),
-                      ),
-                      Ink(
-                        decoration: ShapeDecoration(
-                          color: Colors.white,
-                          shape: CircleBorder(),
-                        ),
-                        child: IconButton(
-                            icon: Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                            ),
-                            onPressed: null),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            )));
+      backgroundColor: Colors.grey[100],
+      body: Center(
+        child: CachedNetworkImage(
+          fit: BoxFit.cover,
+          imageUrl: 'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: null,
+        label: Text('Save'),
+        icon: Icon(Icons.favorite),
+        backgroundColor: Colors.pink,
+      ),
+    ));
   }
 }
