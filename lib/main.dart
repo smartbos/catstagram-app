@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 
 void main() => runApp(MyApp());
@@ -63,11 +64,30 @@ class _MyHomePageState extends State<MyHomePage> {
     return SafeArea(
         child: Scaffold(
       backgroundColor: Colors.grey[100],
-      body: Center(
-        child: CachedNetworkImage(
-          fit: BoxFit.cover,
-          imageUrl: 'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
-        ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            constraints: BoxConstraints.expand(),
+            child: CachedNetworkImage(
+              fit: BoxFit.fill,
+              imageUrl: 'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
+            ),
+          ),
+          BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 5.0,
+                sigmaY: 5.0,
+              ),
+              child: Container(
+                color: Colors.black.withOpacity(0),
+              )),
+          Center(
+            child: CachedNetworkImage(
+              fit: BoxFit.cover,
+              imageUrl: 'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
+            ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: null,
