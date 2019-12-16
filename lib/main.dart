@@ -44,16 +44,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final items = [
-    'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
-    'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
-    'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
-    'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
-  ];
+
+  var catImg;
+  var nextCatImg;
+
+  _MyHomePageState() {
+    catImg = 'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg';
+    nextCatImg = 'https://static01.nyt.com/images/2019/09/04/business/04chinaclone-01/merlin_160087014_de761d9a-4360-402d-a15b-ddeff775760d-articleLarge.jpg?quality=75&auto=webp&disable=upscale';
+  }
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
 
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -70,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
             constraints: BoxConstraints.expand(),
             child: CachedNetworkImage(
               fit: BoxFit.fill,
-              imageUrl: 'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
+              imageUrl: nextCatImg,
             ),
           ),
           BackdropFilter(
@@ -79,13 +80,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 sigmaY: 5.0,
               ),
               child: Container(
-                color: Colors.black.withOpacity(0),
+                color: Colors.black.withOpacity(0.5),
               )),
-          Center(
-            child: CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: 'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg',
-            ),
+          GestureDetector(
+            onHorizontalDragEnd: (e) {
+              setState(() {
+                catImg = nextCatImg;
+                nextCatImg = 'https://specials-images.forbesimg.com/imageserve/5de6f2d8c283810006a3947f/960x0.jpg?fit=scale';
+              });
+            },
+            child: Center(
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: catImg,
+              ),
+            )
           )
         ],
       ),
