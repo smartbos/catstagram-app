@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:ui';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() => runApp(MyApp());
 
@@ -47,14 +49,41 @@ class _MyHomePageState extends State<MyHomePage> {
 
   var catImg;
   var nextCatImg;
+  String imgApiUrl = 'http://cat.leehyunseok.com/api/v1/cat_img?api_token=0THho8A9z64hSgKynrQpwuJr0mXnT468UehvvuymQQWQvtPIU62UQ2nCCjqQXdZDWM7rTlkci0JmiqoJ';
 
   _MyHomePageState() {
     _setInitialImages();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _setInitialImages();
+  }
+
   void _setInitialImages() {
-    catImg = 'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg';
-    nextCatImg = 'https://static01.nyt.com/images/2019/09/04/business/04chinaclone-01/merlin_160087014_de761d9a-4360-402d-a15b-ddeff775760d-articleLarge.jpg?quality=75&auto=webp&disable=upscale';
+    _setCatImg();
+    _setNextCatImg();
+  }
+
+  void _setCatImg() async {
+    var response = await http.get(imgApiUrl);
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+
+    setState(() {
+      catImg = data['data']['url'];
+    });
+  }
+
+  void _setNextCatImg() async {
+    var response = await http.get(imgApiUrl);
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+
+    setState(() {
+      nextCatImg = data['data']['url'];
+    });
   }
 
   @override
@@ -90,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onHorizontalDragEnd: (e) {
               setState(() {
                 catImg = nextCatImg;
-                nextCatImg = 'https://specials-images.forbesimg.com/imageserve/5de6f2d8c283810006a3947f/960x0.jpg?fit=scale';
+                _setNextCatImg();
               });
             },
             child: Center(
