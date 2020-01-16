@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:ui';
 
 void main() => runApp(MyApp());
 
@@ -49,6 +49,10 @@ class _MyHomePageState extends State<MyHomePage> {
   var nextCatImg;
 
   _MyHomePageState() {
+    _setInitialImages();
+  }
+
+  void _setInitialImages() {
     catImg = 'https://pbs.twimg.com/media/ByA3wtYIIAAOwaK.jpg';
     nextCatImg = 'https://static01.nyt.com/images/2019/09/04/business/04chinaclone-01/merlin_160087014_de761d9a-4360-402d-a15b-ddeff775760d-articleLarge.jpg?quality=75&auto=webp&disable=upscale';
   }
